@@ -1,9 +1,22 @@
 <?php
 //Hello World
-$i = 2;
+$i = readline("i=");
+$a = 4;
+$b = "Hi";
+$arr = array(
+    "foo" = "bar"
+)
 /*Hello
 111
 World*/
 if (i > 0)
+then {
     echo "Hello World!";
+} else {
+    echo $i;
+}
+$i = $a * 2;
+do
+    $i = $i + 2;
+while ($i = 6);
 ?>

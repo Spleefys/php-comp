@@ -30,12 +30,10 @@ tokens *addlexeme(tokens *spisok, char *token, char *lexeme, int row, int column
 }
 
 char *dict(char *lexeme) {
-    if(strcmp(lexeme, "require") == 0)
+    if(strcmp(lexeme, "readline") == 0)
         return "input";
-    if(strcmp(lexeme, "print") == 0)
+    if((strcmp(lexeme, "print") == 0)||(strcmp(lexeme, "echo") == 0))
         return "print";
-	if(strcmp(lexeme, "echo") == 0)
-        return "echo";
     if(strcmp(lexeme, "+") == 0)
         return "plus";
     if(strcmp(lexeme, "-") == 0)
@@ -68,12 +66,18 @@ char *dict(char *lexeme) {
         return "then";
     if(strcmp(lexeme, "else") == 0)
         return "else";
+	if(strcmp(lexeme, "{") == 0)
+        return "open";
+    if(strcmp(lexeme, "}") == 0)
+        return "close";
     if(strcmp(lexeme, "do") == 0)
         return "do";
     if(strcmp(lexeme, "while") == 0)
         return "while";
     if(strcmp(lexeme, "$") == 0)
         return "var";
+	if(strcmp(lexeme, "array") == 0)
+        return "array";
     if(strcmp(lexeme, "<?php") == 0)
         return "start";
     if(strcmp(lexeme, "?>") == 0)
@@ -92,7 +96,6 @@ char *dict(char *lexeme) {
 		else
 			return "unknown";
     }
-
 	if (lexeme[0] >= '0' && lexeme[0] <= '9') {
 		for (int i = 1; i < strlen(lexeme); i++) {
 			if (!(lexeme[i] >= '0' && lexeme[i] <= '9'))
@@ -100,7 +103,6 @@ char *dict(char *lexeme) {
 		} 
 		return "numeric";
 	}
-
 	if ((lexeme[0] >= 'A' && lexeme[0] <= 'Z') ||
 		(lexeme[0] >= 'a' && lexeme[0] <= 'z') || (lexeme[0] == '_')) {
 	

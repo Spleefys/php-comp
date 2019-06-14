@@ -1,6 +1,6 @@
 .PHONY: all run clean
 
-all: build lex
+all: build comp
 
 build:
 	mkdir -p build
@@ -11,11 +11,17 @@ build/main.o: main.c
 build/lex.o: lex.c
 	gcc -c lex.c -o build/lex.o
 
-lex: buld/main.o build/lex.o
-	gcc build/main.o build/lex.o -o lex
+build/AST.o: AST.c
+	gcc -c AST.c -o build/AST.o
+
+build/parse.o: parse.c
+	gcc -c parse.c -o build/parse.o
+
+comp: build/main.o build/lex.o build/AST.o build/parse.o
+	gcc build/main.o build/lex.o build/AST.o build/parse.o -o comp
 
 run:
-	./lex t.txt
+	./comp t.txt
 
 clean:
-	rm -rf build lex
+	rm -rf build comp *.gv
